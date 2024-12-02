@@ -381,6 +381,10 @@ return [
                
             ],
         ],
+        [
+            'text' => 'Inventory',
+            'url' => '/inventory',
+        ],
         // ['header' => 'labels'],
         // [
         //     'text' => 'important',

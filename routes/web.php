@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\InventoryController;
 use App\Models\ItemCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ItemCategoryController;
+use App\Models\Inventory;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +54,16 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/store', [ScheduleController::class, 'store']);
         Route::get('/edit/{id}', [ScheduleController::class, 'edit']);
         Route::get('/destroy/{id}', [ScheduleController::class, 'destroy']);
+    });
+
+
+    Route::prefix('inventory')->group(function() {
+        Route::get('/', [InventoryController::class,'index']);
+        Route::get('/getrecords', [InventoryController::class, 'getrecords']);
+        Route::post('/store', [InventoryController::class, 'store']);
+        Route::get('/edit/{id}', [InventoryController::class, 'edit']);
+        Route::get('/destroy/{id}', [InventoryController::class, 'destroy']);
+        Route::get('/getitemsbyitemcategories/{id}', [InventoryController::class, 'getitemsbyitemcategories']);
     });
 });
 

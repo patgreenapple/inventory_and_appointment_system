@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\InventoryController;
 use App\Models\ItemCategory;
 use Illuminate\Support\Facades\Auth;
@@ -64,6 +65,14 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/edit/{id}', [InventoryController::class, 'edit']);
         Route::get('/destroy/{id}', [InventoryController::class, 'destroy']);
         Route::get('/getitemsbyitemcategories/{id}', [InventoryController::class, 'getitemsbyitemcategories']);
+    });
+
+    Route::prefix('appointments')->group(function() {
+        Route::get('/', [AppointmentsController::class,'index']);
+        Route::get('/getrecords', [AppointmentsController::class, 'getrecords']);
+        Route::post('/store', [AppointmentsController::class, 'store']);
+        Route::get('/edit/{id}', [AppointmentsController::class, 'edit']);
+        Route::get('/destroy/{id}', [AppointmentsController::class, 'destroy']);
     });
 });
 

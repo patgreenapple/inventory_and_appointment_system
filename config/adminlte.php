@@ -339,20 +339,33 @@ return [
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
         [
+            'text' => 'Inventory',
+            'url' => '/inventory',
+            'icon' => 'fa fa-th-large'
+        ],
+        [
+            'text' => 'Appointments',
+            'url' => '/appointments',
+            'icon' => 'fa fa-calendar'
+        ],
+        [
             'text' => 'Master Data',
-            'icon' => 'fas fa-fw fa-share',
+            'icon' => 'fa fa-database',
             'submenu' => [
                 [
                     'text' => 'Item Category',
                     'url' => '/item_category',
+                    'icon' => 'fa fa-sitemap'
                 ],
                 [
                     'text' => 'Item',
                     'url' => '/item',
+                    'icon' => 'fa-toolbox'
                 ],
                 [
                     'text' => 'Schedule',
                     'url' => '/schedule',
+                    'icon' => 'fa fa-times-circle-o'
                 ],
                 // [
                 //     'text' => 'level_one',
@@ -381,10 +394,7 @@ return [
                
             ],
         ],
-        [
-            'text' => 'Inventory',
-            'url' => '/inventory',
-        ],
+       
         // ['header' => 'labels'],
         // [
         //     'text' => 'important',

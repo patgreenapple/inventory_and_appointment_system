@@ -347,8 +347,8 @@ return [
                     'url' => '/item_category',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Item',
+                    'url' => '/item',
                 ],
                 // [
                 //     'text' => 'level_one',

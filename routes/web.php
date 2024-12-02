@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ItemCategoryController;
+use App\Http\Controllers\ItemController;
 use App\Models\ItemCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,15 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/store', [ItemCategoryController::class, 'store']);
         Route::get('/edit/{id}', [ItemCategoryController::class, 'edit']);
         Route::get('/destroy/{id}', [ItemCategoryController::class, 'destroy']);
+    });
+
+    Route::prefix('item')->group(function() {
+          Route::get('/', [ItemController::class,'index']);
+          Route::get('/getrecords', [ItemController::class, 'getrecords']);
+          Route::post('/store', [ItemController::class, 'store']);
+          Route::get('/edit/{id}', [ItemController::class, 'edit']);
+          Route::get('/destroy/{id}', [ItemController::class, 'destroy']);
+          
     });
 });
 

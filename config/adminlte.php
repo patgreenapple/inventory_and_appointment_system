@@ -350,6 +350,10 @@ return [
                     'text' => 'Item',
                     'url' => '/item',
                 ],
+                [
+                    'text' => 'Schedule',
+                    'url' => '/schedule',
+                ],
                 // [
                 //     'text' => 'level_one',
                 //     'url' => '#',

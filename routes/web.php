@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\ItemCategoryController;
-use App\Http\Controllers\ItemController;
 use App\Models\ItemCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ItemCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,15 @@ Route::group(['middleware' => 'auth'], function(){
           Route::get('/edit/{id}', [ItemController::class, 'edit']);
           Route::get('/destroy/{id}', [ItemController::class, 'destroy']);
           
+    });
+
+
+    Route::prefix('schedule')->group(function() {
+        Route::get('/', [ScheduleController::class, 'index']);
+        Route::get('/getrecords', [ScheduleController::class, 'getrecords']);
+        Route::post('/store', [ScheduleController::class, 'store']);
+        Route::get('/edit/{id}', [ScheduleController::class, 'edit']);
+        Route::get('/destroy/{id}', [ScheduleController::class, 'destroy']);
     });
 });
 

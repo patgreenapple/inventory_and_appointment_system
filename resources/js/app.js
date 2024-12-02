@@ -10,11 +10,14 @@ window.Vue = require('vue').default;
 import Vue from "vue";
 import VueSimpleAlert from "vue-simple-alert";
 import { ClientTable } from 'vue-tables-2';
+import VSelect from 'vue-select';
+import 'vue-select/dist/vue-select.css';
 Vue.use(ClientTable, {}, false, 'bootstrap4');
 
 // main.js
 
 Vue.use(VueSimpleAlert);
+Vue.component('v-select', VSelect);
 // end of copy
 
 
@@ -30,6 +33,8 @@ Vue.use(VueSimpleAlert);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('item-category-component', require('./components/MasterData/ItemCategoryComponent.vue').default);
+Vue.component('item-component', require('./components/MasterData/ItemComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

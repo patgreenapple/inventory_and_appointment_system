@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ItemCategoryController;
+use App\Models\ItemCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,5 +19,22 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/', function () {
+        return view('/home');
+    });
+
+
+    Route::prefix('item_category')->group(function() {
+        Route::get('/', [ItemCategoryController::class, 'index']);
+        Route::get('/getrecords', [ItemCategoryController::class, 'getrecords']);
+        Route::post('/store', [ItemCategoryController::class, 'store']);
+        Route::get('/edit/{id}', [ItemCategoryController::class, 'edit']);
+        Route::get('/destroy/{id}', [ItemCategoryController::class, 'destroy']);
+    });
+});
+
+
 
 

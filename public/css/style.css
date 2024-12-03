@@ -1,0 +1,31 @@
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    margin : 0;
+    padding : 0;
+}
+
+/* HEADER STYLE  */
+
+.navbar {
+  background-color: #ff99bb;
+  position: fixed;
+  top : 0;
+  width: 100%;
+  font-size: 18px;
+  /* z-index: 1000; */
+}
+.navbar .company-name {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.navbar a {
+  color: white;
+}
+
+.main-content {
+  margin-top: 80px !important;
+}

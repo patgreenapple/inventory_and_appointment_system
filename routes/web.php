@@ -21,14 +21,24 @@ use App\Models\Inventory;
 |
 */
 Auth::routes();
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/home', function () {
+//     return view('landingpage');
+// });
+
+Route::get('/', function () { 
+    
+    // $services = Service::get(); 
+    // $contents = Content::first();
+    
+    return view('client.home.home'); 
+
 });
 
+
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/', function () {
-        return view('/home');
-    });
+    // Route::get('/', function () {
+    //     return view('/home');
+    // });
 
 
     Route::prefix('item_category')->group(function() {

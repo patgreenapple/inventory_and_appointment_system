@@ -33,6 +33,8 @@ Vue.component('v-select', VSelect);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('landing-page-component', require('./components/FrontEnd/LandingPageComponent.vue').default);
+// Vue.component('home-component', require('./components/HomeComponent.vue').default);
 Vue.component('item-category-component', require('./components/MasterData/ItemCategoryComponent.vue').default);
 Vue.component('item-component', require('./components/MasterData/ItemComponent.vue').default);
 Vue.component('schedule-component', require('./components/MasterData/ScheduleComponent.vue').default);

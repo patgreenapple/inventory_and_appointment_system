@@ -349,6 +349,11 @@ return [
             'icon' => 'fa fa-calendar'
         ],
         [
+            'text' => 'Inquiries',
+            'url' => '/contact_us_login',
+            'icon' => 'fa fa-info-circle'
+        ],
+        [
             'text' => 'Master Data',
             'icon' => 'fa fa-database',
             'submenu' => [
@@ -366,6 +371,11 @@ return [
                     'text' => 'Schedule',
                     'url' => '/schedule',
                     'icon' => 'fa fa-times-circle-o'
+                ],
+                [
+                    'text' => 'Payment Methods',
+                    'url' => '/payment_method',
+                    'icon' => 'fa fa-credit-card-alt'
                 ],
                 // [
                 //     'text' => 'level_one',

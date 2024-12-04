@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ItemCategoryController;
+use App\Http\Controllers\PaymentMethodsController;
 use App\Models\Inventory;
 
 /*
@@ -51,8 +52,8 @@ Route::get('/product', function () {
 // });
 
 Route::prefix('contact_us')->group(function() {
-    Route::get('/', [ContactUsController::class,'index']);
-    Route::post('/store', [ContactUsController::class, 'store'])->name('contact_us.store');
+    Route::get('/', [ContactUsController::class,'index_without_user']);
+    Route::post('/store_without_user', [ContactUsController::class, 'store'])->name('contact_us.store_without_user');
 });
 
 
@@ -66,9 +67,9 @@ Route::get('/payment', function () {
 
 
 Route::group(['middleware' => 'auth'], function(){
-    // Route::get('/', function () {
-    //     return view('/home');
-    // });
+    Route::get('/home', function () {
+        return view('/home');
+    });
 
 
     Route::prefix('item_category')->group(function() {
@@ -114,6 +115,25 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/edit/{id}', [AppointmentsController::class, 'edit']);
         Route::get('/destroy/{id}', [AppointmentsController::class, 'destroy']);
     });
+
+    Route::prefix('payment_method')->group(function() {
+        Route::get('/', [PaymentMethodsController::class,'index']);
+        Route::get('/getrecords', [PaymentMethodsController::class, 'getrecords']);
+        Route::post('/store', [PaymentMethodsController::class, 'store']);
+        Route::get('/edit/{id}', [PaymentMethodsController::class, 'edit']);
+        Route::get('/destroy/{id}', [PaymentMethodsController::class, 'destroy']);
+    });
+
+
+    Route::prefix('contact_us_login')->group(function() {
+        Route::get('/', [ContactUsController::class,'index']);
+        Route::get('/getrecords', [ContactUsController::class, 'getrecords']);
+        Route::post('/store', [ContactUsController::class, 'store']);
+        Route::get('/edit/{id}', [ContactUsController::class, 'edit']);
+        Route::get('/destroy/{id}', [ContactUsController::class, 'destroy']);
+    });
+    
+
 });
 
 

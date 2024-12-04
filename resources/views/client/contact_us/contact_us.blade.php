@@ -6,7 +6,7 @@
                 <h1 class="mb-3">Contact Us</h1>
                 <p>If you have any questions, feel free to reach out to us using the form below.</p>
             </div>
-            <form action="{{ route('contact_us.store') }}" method="post" class="row g-3">
+            <form action="{{ route('contact_us.store_without_user') }}" method="post" class="row g-3">
                 @csrf  <!-- CSRF protection -->
 
                 @if(session()->has('message'))
@@ -42,26 +42,7 @@
         body {
             background-color: #ffe6f2;
         }
-        .contact-card {
-            background-color: #fff0f5;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-        .submit-button {
-            background-color: #ff80b3; /* Bright pink button */
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .submit-button:hover {
-            background-color: #e6739f; /* Slightly darker pink on hover */
-        }
+       
         h1 {
             color: #b30086;
         }

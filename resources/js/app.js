@@ -37,9 +37,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 // Vue.component('home-component', require('./components/HomeComponent.vue').default);
 Vue.component('item-category-component', require('./components/MasterData/ItemCategoryComponent.vue').default);
 Vue.component('item-component', require('./components/MasterData/ItemComponent.vue').default);
+Vue.component('payment-method-component', require('./components/MasterData/PaymentMethodComponent.vue').default);
 Vue.component('schedule-component', require('./components/MasterData/ScheduleComponent.vue').default);
 Vue.component('inventory-component', require('./components/InventoryComponent.vue').default);
 Vue.component('appointment-component', require('./components/AppointmentComponent.vue').default)
+Vue.component('inquiry-component', require('./components/InquiryComponent.vue').default)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppointmentsController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\InventoryController;
 use App\Models\ItemCategory;
 use Illuminate\Support\Facades\Auth;
@@ -27,12 +28,41 @@ Auth::routes();
 
 Route::get('/', function () { 
     
-    // $services = Service::get(); 
-    // $contents = Content::first();
-    
     return view('client.home.home'); 
 
 });
+
+Route::get('/services', function () { 
+    
+    return view('client.service.service'); 
+
+});
+
+Route::get('/product', function () { 
+    
+    return view('client.product.product'); 
+
+});
+
+// Route::get('/contact_us', function () { 
+    
+//     return view('client.contact_us.contact_us'); 
+
+// });
+
+Route::prefix('contact_us')->group(function() {
+    Route::get('/', [ContactUsController::class,'index']);
+    Route::post('/store', [ContactUsController::class, 'store'])->name('contact_us.store');
+});
+
+
+Route::get('/payment', function () { 
+    
+    return view('client.payment.payment'); 
+
+});
+
+
 
 
 Route::group(['middleware' => 'auth'], function(){

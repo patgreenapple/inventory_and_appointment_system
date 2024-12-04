@@ -13,10 +13,10 @@
     @yield('css')
 @stop
 
-@section('classes_body'){{ ($auth_type ?? 'login') . '-page' }}@stop
+@section('classes_body'){{ 'main-container ' . ($auth_type ?? 'login') . '-page' }}@stop
 
 @section('body')
-    <div class="{{ $auth_type ?? 'login' }}-box">
+    <div class=" {{ $auth_type ?? 'login' }}-box ">
 
         {{-- Logo --}}
         <div class="{{ $auth_type ?? 'login' }}-logo">
@@ -79,3 +79,8 @@
     @stack('js')
     @yield('js')
 @stop
+<style>
+    .main-container {
+        background: linear-gradient(135deg, #ffe6f0, #ffccdd);
+    }
+</style>

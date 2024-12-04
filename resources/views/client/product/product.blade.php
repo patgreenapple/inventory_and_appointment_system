@@ -13,7 +13,7 @@
                         </p>
                         `<p class="text-primary fw-bold">₱150.00</p>`
                          <div class="d-flex justify-content-center">
-                                <button class="buy-button">Buy Now</button>
+                                <a href="{{ route('login') }}" style="color: white" class="buy-button btn btn-primary">Buy Now</a>
                          </div>
                          
                     </div>
@@ -31,7 +31,7 @@
                         </p>
                         `<p class="text-primary fw-bold">₱350.00</p>`
                          <div class="d-flex justify-content-center">
-                                <button class="buy-button">Buy Now</button>
+                         <a href="{{ route('login') }}" style="color: white" class="buy-button btn btn-primary">Buy Now</a>
                          </div>
                          
                     </div>
@@ -50,7 +50,7 @@
                         `<p class="text-primary fw-bold">₱75.00</p>`
                         
                          <div class="d-flex justify-content-center">
-                                <button class="buy-button">Buy Now</button>
+                         <a href="{{ route('login') }}" style="color: white" class="buy-button btn btn-primary">Buy Now</a>
                          </div>
                          
                     </div>

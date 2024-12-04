@@ -58,17 +58,17 @@
 
 <section class="services-container" aria-label="Available Services">
     <article class="service-card">
-        <img src="http://localhost/iori/images/1.jpg" alt="Decorative nail art" class="service-image"> <!-- Placeholder image -->
+        <img  src="image/1.jpg"  alt="Decorative nail art" class="service-image"> <!-- Placeholder image -->
 
         
     </article>
     <article class="service-card">
-        <img src="http://localhost/iori/images/2.jpg" alt="Close-up of eyelash extensions" class="service-image"> <!-- Placeholder image -->
+        <img  src="image/2.jpg" alt="Close-up of eyelash extensions" class="service-image"> <!-- Placeholder image -->
        
         
     </article>
     <article class="service-card">
-        <img src="http://localhost/iori/images/3.jpg" alt="Manicure and pedicure tools" class="service-image"> <!-- Placeholder image -->
+        <img  src="image/3.jpg" alt="Manicure and pedicure tools" class="service-image"> <!-- Placeholder image -->
         
         
     </article>
@@ -76,17 +76,17 @@
 
 <section class="services-container" aria-label="Available Services">
     <article class="service-card">
-        <img src="http://localhost/iori/images/4.jpg" alt="Decorative nail art" class="service-image"> <!-- Placeholder image -->
+        <img  src="image/4.jpg" alt="Decorative nail art" class="service-image"> <!-- Placeholder image -->
         
         
     </article>
     <article class="service-card">
-        <img src="http://localhost/iori/images/5.jpg" alt="Close-up of eyelash extensions" class="service-image"> <!-- Placeholder image -->
+        <img  src="image/5.jpg" alt="Close-up of eyelash extensions" class="service-image"> <!-- Placeholder image -->
         
         
     </article>
     <article class="service-card">
-        <img src="http://localhost/iori/images/6.jpg" alt="Manicure and pedicure tools" class="service-image"> <!-- Placeholder image -->
+        <img  src="image/6.jpg" alt="Manicure and pedicure tools" class="service-image"> <!-- Placeholder image -->
         
         
     </article>
@@ -99,7 +99,7 @@
     <br>
 <br>
     <div class="contact-btn-container">
-        <a href="contact.html" class="contact-btn">Get in Touch</a>
+        <a href="{{ url('/contact_us') }}" class="contact-btn">Get in Touch</a>
     </div>
 </section>
 

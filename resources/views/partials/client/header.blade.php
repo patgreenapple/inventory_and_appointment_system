@@ -14,28 +14,40 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav mb-2 mb-lg-0">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0"> <!-- Centering links -->
                 <li class="nav-item">
-                <a class="nav-link active" href="#">Home</a>
+                    <a href="{{ url('/') }}" class="nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
+                    <a href="{{ url('/services') }}" class="nav-link {{ request()->is('services') ? 'active' : '' }}">Services</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Products</a>
+                    <a href="{{ url('/product') }}" class="nav-link {{ request()->is('product') ? 'active' : '' }}">Products</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Appointments</a>
+                    <a href="#" class="nav-link {{ request()->is('appointments') ? 'active' : '' }}">Appointments</a>
                 </li>
             </ul>
             </div>
         <div class="d-flex">
-            <button class="btn btn-primary me-2">Login</button>
-            <button class="btn btn-success">Register</button>
+            <a href="{{ route('login') }}" class="btn me-2">Login</a>
+            <a href="{{ route('register') }}" class="btn">Register</a>
         </div>
         </div>
     </div>
 </nav>
 <style>
-
+.btn {
+    /* background-color: #ffffff; */
+    color: #ff6699;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: bold;
+}
+.btn:hover {
+    background-color: #ff6699;
+    color: #fff;
+}
 </style>

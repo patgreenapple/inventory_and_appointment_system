@@ -6071,7 +6071,8 @@ __webpack_require__.r(__webpack_exports__);
       dataPassword: [],
       modalId: '',
       modalTitle: '',
-      isEdit: false
+      isEdit: false,
+      userID: ''
     };
   },
   methods: {
@@ -6136,10 +6137,11 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    changePasswordModal: function changePasswordModal() {
+    changePasswordModal: function changePasswordModal(id) {
       $('#changepassword').modal('show');
       this.modalTitle = 'Change Password';
       this.dataPassword = {
+        user_id: id,
         newPassword: '',
         confirmPassword: ''
       };
@@ -6147,15 +6149,14 @@ __webpack_require__.r(__webpack_exports__);
     changePassword: function changePassword() {
       var _this5 = this;
       if (this.dataPassword.newPassword == this.dataPassword.confirmPassword) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post('users/changepassword', this.dataPassword).then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('users/store_changepassword', this.dataPassword).then(function (response) {
           _this5.messageBox('Success', response.data.message, 'success');
-          // $('#add-user').modal('hide');
+          $('#changepassword').modal('hide');
         })["catch"](function (error) {
           _this5.errors = error.response.data.errors;
         });
       } else {
-        this.messageBox('Alert', 'Password does not matched!', 'alert');
-        // console.log('test');
+        this.messageBox('Alert', 'Password does not match!', 'warning');
       }
     }
   },
@@ -7981,9 +7982,9 @@ var render = function render() {
         _vm.$set(_vm.dataPassword, "newPassword", $event.target.value);
       }
     }
-  }), _vm._v(" "), _vm.errors.name ? _c("div", {
+  }), _vm._v(" "), _vm.errors.newPassword ? _c("div", {
     staticClass: "text-danger"
-  }, [_vm._v(_vm._s(_vm.errors.name[0]))]) : _vm._e()]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.errors.newPassword[0]))]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "form-group col-md-12"
   }, [_c("label", {
     attrs: {
@@ -8010,9 +8011,9 @@ var render = function render() {
         _vm.$set(_vm.dataPassword, "confirmPassword", $event.target.value);
       }
     }
-  }), _vm._v(" "), _vm.errors.name ? _c("div", {
+  }), _vm._v(" "), _vm.errors.confirmPassword ? _c("div", {
     staticClass: "text-danger"
-  }, [_vm._v(_vm._s(_vm.errors.name[0]))]) : _vm._e()])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.errors.confirmPassword[0]))]) : _vm._e()])])]), _vm._v(" "), _c("div", {
     staticClass: "modal-footer"
   }, [_c("button", {
     staticClass: "btn btn-secondary",

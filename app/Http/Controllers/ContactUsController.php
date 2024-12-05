@@ -12,6 +12,7 @@ class ContactUsController extends Controller
     }
     
     public function store_without_user(Request $request) {
+        dd($request);
         $request->validate([
             'name' => 'required',
             'email' => 'required',

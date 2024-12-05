@@ -93,13 +93,13 @@
                         <div  class="form-group col-md-12">
                             <label for="name">New Password</label>
                             <input type="password" class="form-control" id="name" v-model="dataPassword.newPassword">
-                            <div class="text-danger" v-if="errors.name">{{ errors.name[0] }}</div>
+                            <div class="text-danger" v-if="errors.newPassword">{{ errors.newPassword[0] }}</div>
                         </div>
 
                         <div  class="form-group col-md-12">
                             <label for="name">Confirm Password</label>
                             <input type="password" class="form-control" id="name" v-model="dataPassword.confirmPassword">
-                            <div class="text-danger" v-if="errors.name">{{ errors.name[0] }}</div>
+                            <div class="text-danger" v-if="errors.confirmPassword">{{ errors.confirmPassword[0] }}</div>
                         </div>
                     </div>
                 </div>
@@ -141,6 +141,7 @@ export default {
             modalId : '',
             modalTitle : '',
             isEdit : false,
+            userID : '',
         }
     },
 
@@ -211,10 +212,11 @@ export default {
                 });
         },
 
-        changePasswordModal() {
+        changePasswordModal(id) {
             $('#changepassword').modal('show');
             this.modalTitle = 'Change Password';
             this.dataPassword = {
+                user_id : id,
                 newPassword : '',
                 confirmPassword : '',
             };
@@ -223,16 +225,15 @@ export default {
         changePassword() {
             
             if(this.dataPassword.newPassword == this.dataPassword.confirmPassword) {
-                axios.post('users/changepassword', this.dataPassword).then(response => {
+                axios.post('users/store_changepassword', this.dataPassword).then(response => {
                 this.messageBox('Success', response.data.message,'success');
-                // $('#add-user').modal('hide');
+                $('#changepassword').modal('hide');
              
             }).catch(error => {
                 this.errors = error.response.data.errors;
             });
             } else {
-                this.messageBox('Alert', 'Password does not matched!' ,'alert');
-                // console.log('test');
+                this.messageBox('Alert', 'Password does not match!', 'warning');
             }
            
         }

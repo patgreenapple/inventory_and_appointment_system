@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Roles;
 use App\Models\User;
+use App\Models\Roles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -51,6 +52,19 @@ class UserController extends Controller
 
 
     public function change_password(Request $request) {
+        $request->validate([
+            'newPassword' => 'required',
+            'confirmPassword' => 'required',
+        ],[
+            'newPassword.required' => 'The new password field is required',
+            'confirmPassword.required' => 'The confirm password field is required',
+        ]);
+
+        $data = User::where('id', $request->user_id)->first();
+        $newPassword = Hash::make($request->newPassword);
+        $data->password = $newPassword;
+        $data->save();
+         return response()->json(['message' => 'Password Successfully Change'], 200);
         dd($request);
     }
 }

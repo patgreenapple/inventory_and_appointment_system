@@ -35,10 +35,16 @@ Vue.component('v-select', VSelect);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('landing-page-component', require('./components/FrontEnd/LandingPageComponent.vue').default);
 // Vue.component('home-component', require('./components/HomeComponent.vue').default);
+
+// MASTER DATA
 Vue.component('item-category-component', require('./components/MasterData/ItemCategoryComponent.vue').default);
 Vue.component('item-component', require('./components/MasterData/ItemComponent.vue').default);
 Vue.component('payment-method-component', require('./components/MasterData/PaymentMethodComponent.vue').default);
 Vue.component('schedule-component', require('./components/MasterData/ScheduleComponent.vue').default);
+Vue.component('services-component', require('./components/MasterData/ServicesComponent.vue').default);
+
+
+
 Vue.component('inventory-component', require('./components/InventoryComponent.vue').default);
 Vue.component('appointment-component', require('./components/AppointmentComponent.vue').default)
 Vue.component('inquiry-component', require('./components/InquiryComponent.vue').default)

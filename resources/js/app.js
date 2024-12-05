@@ -42,6 +42,7 @@ Vue.component('item-component', require('./components/MasterData/ItemComponent.v
 Vue.component('payment-method-component', require('./components/MasterData/PaymentMethodComponent.vue').default);
 Vue.component('schedule-component', require('./components/MasterData/ScheduleComponent.vue').default);
 Vue.component('services-component', require('./components/MasterData/ServicesComponent.vue').default);
+Vue.component('roles-component', require('./components/MasterData/RolesComponent.vue').default);
 
 
 

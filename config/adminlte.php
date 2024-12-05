@@ -378,6 +378,11 @@ return [
                     'icon' => 'fa fa-credit-card-alt'
                 ],
                 [
+                    'text' => 'Roles',
+                    'url' => '/roles',
+                    'icon' => 'fa fa-credit-card-alt'
+                ],
+                [
                     'text' => 'Payment Methods',
                     'url' => '/payment_method',
                     'icon' => 'fa fa-credit-card-alt'

@@ -5165,26 +5165,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {
+    return _defineProperty(_defineProperty(_defineProperty({
       dataValues: [],
       dataTable: [],
-      columns: ['id', 'name', 'created_at', 'updated_at', 'action'],
+      columns: ['id', 'full_name', 'email', 'mobile_number', 'service_name', 'preferred_date', 'time', 'created_at', 'updated_at', 'action'],
       options: {
         headings: {
           id: 'ID',
-          name: 'Name',
+          full_name: 'Name',
+          email: 'Email',
+          mobile_number: 'Mobile Number',
+          service_name: 'Service',
+          preferred_date: 'Appointment Date',
+          time: 'Appointment Time',
           created_at: 'Created At',
           updated_at: 'Updated At',
           action: 'Actions'
         }
       },
       errors: [],
-      modalId: '',
-      modalTitle: ''
-    };
+      services: [],
+      user: [],
+      even_hours: [],
+      id: null,
+      name: '',
+      mobile_number: '',
+      email: '',
+      service_id: '',
+      appointment_date: '',
+      appointment_time: '',
+      minDate: '',
+      modalId: ''
+    }, "modalId", ''), "modalTitle", ''), "isEdit", false);
   },
   methods: {
     messageBox: function messageBox(title, text, type) {
@@ -5197,39 +5216,64 @@ __webpack_require__.r(__webpack_exports__);
       this.getRecords();
     },
     initForm: function initForm() {
+      this.id = '';
+      this.name = '';
+      this.email = '';
+      this.mobile_number = '';
+      this.service_id = '';
+      this.appointment_date = '';
+      this.appointment_time = '';
       this.errors = [];
-      this.dataValues = {
-        name: ''
-      };
+      this.isEdit = false;
     },
     getRecords: function getRecords() {
       var _this = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get('appointments/getrecords').then(function (response) {
         _this.dataTable = response.data.data;
+        _this.services = response.data.services;
+        _this.user = response.data.user;
+        _this.even_hours = response.data.even_hours;
       });
     },
     addItemCategory: function addItemCategory() {
       this.initForm();
-      this.modalId = 'add-item-category';
-      this.modalTitle = 'Add Item Category';
+      this.modalId = 'add-appointment';
+      this.modalTitle = 'Add Appointment';
+      this.name = this.user.name;
+      this.email = this.user.email;
+      this.mobile_number = this.user.mobile_number;
       $('#' + this.modalId).modal('show');
     },
     store: function store() {
       var _this2 = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('appointments/store', this.dataValues).then(function (response) {
+      var data = {
+        is_edit: this.isEdit,
+        id: this.id,
+        service_id: this.service_id,
+        appointment_date: this.appointment_date,
+        appointment_time: this.appointment_time
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('appointments/store', data).then(function (response) {
         _this2.messageBox('Success', response.data.message, 'success');
         $('#' + _this2.modalId).modal('hide');
+        _this2.getRecords();
       })["catch"](function (error) {
         _this2.errors = error.response.data.errors;
       });
     },
     edit: function edit(id) {
       var _this3 = this;
+      this.isEdit = true;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get('appointments/edit/' + id).then(function (response) {
-        console.log(response);
-        _this3.modalId = 'add-item-category';
-        _this3.modalTitle = 'Edit Item Category';
-        _this3.dataValues = response.data.data;
+        _this3.modalId = 'add-appointment';
+        _this3.modalTitle = 'Edit Appointment';
+        _this3.id = response.data.data.id;
+        _this3.name = response.data.data.full_name;
+        _this3.email = response.data.data.email;
+        _this3.mobile_number = response.data.data.mobile_number;
+        _this3.service_id = response.data.data.service_id;
+        _this3.appointment_date = response.data.data.preferred_date;
+        _this3.appointment_time = response.data.data.time;
         $('#' + _this3.modalId).modal('show');
       });
     },
@@ -5244,6 +5288,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getRecords();
+    var today = new Date();
+    today.setDate(today.getDate() + 1); // Calculate tomorrow's date
+    this.minDate = today.toISOString().split('T')[0]; // Format as YYYY-MM-DD
   }
 });
 
@@ -6194,7 +6241,7 @@ var render = function render() {
         return _vm.addItemCategory();
       }
     }
-  }, [_vm._v("Add Item Category")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Add Appointment")])]), _vm._v(" "), _c("div", {
     staticClass: "container-fluid"
   }, [_c("v-client-table", {
     attrs: {
@@ -6225,7 +6272,7 @@ var render = function render() {
   })], 1), _vm._v(" "), _c("div", {
     staticClass: "modal fade",
     attrs: {
-      id: "add-item-category",
+      id: "add-appointment",
       tabindex: "-1",
       role: "dialog",
       "aria-labelledby": "exampleModalLabel",
@@ -6259,8 +6306,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.dataValues.name,
-      expression: "dataValues.name"
+      value: _vm.name,
+      expression: "name"
     }],
     staticClass: "form-control",
     attrs: {
@@ -6268,17 +6315,148 @@ var render = function render() {
       id: "name"
     },
     domProps: {
-      value: _vm.dataValues.name
+      value: _vm.name
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.$set(_vm.dataValues, "name", $event.target.value);
+        _vm.name = $event.target.value;
       }
     }
-  }), _vm._v(" "), _vm.errors.name ? _c("div", {
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "form-group col-md-12"
+  }, [_c("label", {
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Email")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.email,
+      expression: "email"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      id: "email"
+    },
+    domProps: {
+      value: _vm.email
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.email = $event.target.value;
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "form-group col-md-12"
+  }, [_c("label", {
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Mobile Number")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.mobile_number,
+      expression: "mobile_number"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      id: "mobile_number"
+    },
+    domProps: {
+      value: _vm.mobile_number
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.mobile_number = $event.target.value;
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "form-group col-md-12"
+  }, [_c("label", {
+    attrs: {
+      "for": "service_id"
+    }
+  }, [_vm._v("Services")]), _vm._v(" "), _c("v-select", {
+    attrs: {
+      options: _vm.services,
+      reduce: function reduce(item) {
+        return item.id;
+      },
+      label: "name",
+      placeholder: "Select a Service"
+    },
+    model: {
+      value: _vm.service_id,
+      callback: function callback($$v) {
+        _vm.service_id = $$v;
+      },
+      expression: "service_id"
+    }
+  }), _vm._v(" "), _vm.errors.service_id ? _c("div", {
     staticClass: "text-danger"
-  }, [_vm._v(_vm._s(_vm.errors.name[0]))]) : _vm._e()])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.errors.service_id[0]))]) : _vm._e()], 1), _vm._v(" "), _c("div", {
+    staticClass: "form-group col-md-12"
+  }, [_c("label", {
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Appointment Date")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.appointment_date,
+      expression: "appointment_date"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "date",
+      id: "appointment_date",
+      min: _vm.minDate,
+      max: _vm.minDate
+    },
+    domProps: {
+      value: _vm.appointment_date
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.appointment_date = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _vm.errors.appointment_date ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v(_vm._s(_vm.errors.appointment_date[0]))]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group col-md-12"
+  }, [_c("label", {
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Appointment Time")]), _vm._v(" "), _c("v-select", {
+    attrs: {
+      options: _vm.even_hours,
+      reduce: function reduce(hours) {
+        return hours;
+      },
+      label: "hours",
+      placeholder: "Select a Time"
+    },
+    model: {
+      value: _vm.appointment_time,
+      callback: function callback($$v) {
+        _vm.appointment_time = $$v;
+      },
+      expression: "appointment_time"
+    }
+  }), _vm._v(" "), _vm.errors.appointment_time ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v(_vm._s(_vm.errors.appointment_time[0]))]) : _vm._e()], 1)])]), _vm._v(" "), _c("div", {
     staticClass: "modal-footer"
   }, [_c("button", {
     staticClass: "btn btn-secondary",

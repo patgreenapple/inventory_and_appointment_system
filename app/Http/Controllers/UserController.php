@@ -64,7 +64,6 @@ class UserController extends Controller
         $newPassword = Hash::make($request->newPassword);
         $data->password = $newPassword;
         $data->save();
-         return response()->json(['message' => 'Password Successfully Change'], 200);
-        dd($request);
+        return response()->json(['message' => 'Password Successfully Change'], 200);
     }
 }

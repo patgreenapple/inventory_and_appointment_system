@@ -11,6 +11,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\PaymentMethodsController;
 use App\Models\Inventory;
+use App\Models\Schedule;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,21 +46,38 @@ Route::get('/product', function () {
 
 });
 
-// Route::get('/contact_us', function () { 
-    
-//     return view('client.contact_us.contact_us'); 
-
-// });
-
 Route::prefix('contact_us')->group(function() {
     Route::get('/', [ContactUsController::class,'index_without_user']);
-    Route::post('/store_without_user', [ContactUsController::class, 'store'])->name('contact_us.store_without_user');
+    Route::post('/store_without_user', [ContactUsController::class, 'store_without_user'])->name('contact_us.store_without_user');
 });
 
 
 Route::get('/payment', function () { 
     
     return view('client.payment.payment'); 
+
+});
+
+Route::get('/appointment_with_out_user', function () { 
+    $schedule = Schedule::get();
+    $opening_time = $schedule[0]['opening_time'];
+    $closing_time = $schedule[0]['closing_time'];
+    
+    // Extract the hour from the opening and closing time strings (assuming times are in a format like '8:00 AM' or '8:00 PM')
+    $opening_hour = (int) date('G', strtotime($opening_time));  // 'G' returns the hour in 24-hour format without leading zeros
+    $closing_hour = (int) date('G', strtotime($closing_time));
+    
+    $even_hours = [];
+    
+    for ($i = $opening_hour; $i <= $closing_hour; $i++) {
+        // Check if the hour is even
+        if ($i % 2 == 0) {
+            // Add the hour with ":00" to the array
+            $even_hours[] = sprintf("%02d:00", $i);  // Format hour as "HH:00"
+        }
+    }
+
+    return view('client.appointment.appointment', compact('even_hours')); 
 
 });
 

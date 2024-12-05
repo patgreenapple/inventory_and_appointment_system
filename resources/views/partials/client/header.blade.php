@@ -25,7 +25,7 @@
                     <a href="{{ url('/product') }}" class="nav-link {{ request()->is('product') ? 'active' : '' }}">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link {{ request()->is('appointments') ? 'active' : '' }}">Appointments</a>
+                    <a href="{{ url('/appointment_with_out_user') }}" class="nav-link {{ request()->is('appointments') ? 'active' : '' }}">Appointments</a>
                 </li>
             </ul>
             </div>

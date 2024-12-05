@@ -1,20 +1,23 @@
 <?php
 
-use App\Http\Controllers\AppointmentsController;
-use App\Http\Controllers\ContactUsController;
-use App\Http\Controllers\InventoryController;
+use Carbon\Carbon;
+use App\Models\Schedule;
+use App\Models\Services;
+use App\Models\Inventory;
+use App\Models\Appointments;
 use App\Models\ItemCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\PaymentMethodsController;
-use App\Http\Controllers\RolesController;
-use App\Http\Controllers\ServicesController;
-use App\Http\Controllers\UserController;
-use App\Models\Inventory;
-use App\Models\Schedule;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,29 +63,49 @@ Route::get('/payment', function () {
     return view('client.payment.payment'); 
 
 });
-
-Route::get('/appointment_with_out_user', function () { 
-    $schedule = Schedule::get();
-    $opening_time = $schedule[0]['opening_time'];
-    $closing_time = $schedule[0]['closing_time'];
+Route::prefix('appointment_front')->group(function() { 
+    Route::get('/appointment_with_out_user', function () { 
+        $services = Services::all();
+        $today = Carbon::today(); // Gets today's date
+        $nextDay = $today->addDay()->toDateString(); // Adds 1 day to today's date
+        $time_checker = Appointments::where('preferred_date', $nextDay)
+        ->pluck('time') // Get only the 'time' column as an array
+        ->toArray();
+        $schedule = Schedule::first();
     
-    // Extract the hour from the opening and closing time strings (assuming times are in a format like '8:00 AM' or '8:00 PM')
-    $opening_hour = (int) date('G', strtotime($opening_time));  // 'G' returns the hour in 24-hour format without leading zeros
-    $closing_hour = (int) date('G', strtotime($closing_time));
-    
-    $even_hours = [];
-    
-    for ($i = $opening_hour; $i <= $closing_hour; $i++) {
-        // Check if the hour is even
-        if ($i % 2 == 0) {
-            // Add the hour with ":00" to the array
-            $even_hours[] = sprintf("%02d:00", $i);  // Format hour as "HH:00"
+        $opening_time = $schedule['opening_time'];
+        $closing_time = $schedule['closing_time'];
+        
+      
+        $opening_hour = (int) date('G', strtotime($opening_time)); 
+        $closing_hour = (int) date('G', strtotime($closing_time));
+        
+        $even_hours = [];
+        
+        for ($i = $opening_hour; $i <= $closing_hour; $i++) {
+            // Check if the hour is even
+            if ($i % 2 == 0) {
+                // Add the hour with ":00" to the array
+                $even_hours[] = sprintf("%02d:00", $i);  // Format hour as "HH:00"
+            }
         }
-    }
 
-    return view('client.appointment.appointment', compact('even_hours')); 
+        $available_hours = array_filter($even_hours, function ($time) use ($time_checker) {
+            return !in_array($time, $time_checker); // Check if the time is not in the time_checker array
+        });
+        
+        $available_hours = array_values($available_hours); // Reindex the array to reset keys
+    
+        return view('client.appointment.appointment', compact('available_hours', 'services')); 
+    
+    });
+
+    
 
 });
+
+
+
 
 
 
@@ -135,6 +158,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/store', [AppointmentsController::class, 'store']);
         Route::get('/edit/{id}', [AppointmentsController::class, 'edit']);
         Route::get('/destroy/{id}', [AppointmentsController::class, 'destroy']);
+        Route::post('/appointment_store_with_out_user', [AppointmentsController::class, 'store_without_user'])->name('appointment_store_with_out_user');
     });
 
     Route::prefix('payment_method')->group(function() {

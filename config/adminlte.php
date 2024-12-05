@@ -387,6 +387,11 @@ return [
                     'url' => '/payment_method',
                     'icon' => 'fa fa-credit-card-alt'
                 ],
+                [
+                    'text' => 'Users',
+                    'url' => '/users',
+                    'icon' => 'fa fa-credit-card-alt'
+                ],
                 // [
                 //     'text' => 'level_one',
                 //     'url' => '#',

@@ -53,6 +53,42 @@
             @enderror
         </div>
 
+        {{-- Mobile Number Field field --}}
+        <div class="input-group mb-3">
+            <input type="text" name="mobile_number" class="form-control @error('mobile_number') is-invalid @enderror"
+                   value="{{ old('mobile_number') }}" placeholder="{{ __('Mobile Number') }}" autofocus>
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <!-- <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span> -->
+                </div>
+            </div>
+
+            @error('mobile_number')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
+        {{-- Address Field field --}}
+        <div class="input-group mb-3">
+            <input type="text" name="address" class="form-control @error('address') is-invalid @enderror"
+                   value="{{ old('address') }}" placeholder="{{ __('.Address') }}" autofocus>
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <!-- <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span> -->
+                </div>
+            </div>
+
+            @error('address')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
         {{-- Password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"

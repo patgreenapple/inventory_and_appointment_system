@@ -12,6 +12,7 @@ use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\UserController;
 use App\Models\Inventory;
 use App\Models\Schedule;
 
@@ -167,6 +168,16 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/store', [RolesController::class, 'store']);
         Route::get('/edit/{id}', [RolesController::class, 'edit']);
         Route::get('/destroy/{id}', [RolesController::class, 'destroy']);
+    });
+
+
+    Route::prefix('users')->group(function() {
+        Route::get('/', [UserController::class, 'index']);
+        Route::get('/getrecords', [UserController::class, 'getrecords']);
+        Route::post('/store', [UserController::class, 'store']);
+        Route::get('/edit/{id}', [UserController::class, 'edit']);
+        Route::get('/destroy/{id}', [UserController::class, 'destroy']);
+        Route::post('/store_changepassword', [UserController::class, 'change_password']);
     });
     
 

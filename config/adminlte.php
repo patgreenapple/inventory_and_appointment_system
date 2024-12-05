@@ -373,6 +373,11 @@ return [
                     'icon' => 'fa fa-times-circle-o'
                 ],
                 [
+                    'text' => 'Services',
+                    'url' => '/services',
+                    'icon' => 'fa fa-credit-card-alt'
+                ],
+                [
                     'text' => 'Payment Methods',
                     'url' => '/payment_method',
                     'icon' => 'fa fa-credit-card-alt'

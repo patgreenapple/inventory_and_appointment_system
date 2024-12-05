@@ -10,6 +10,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\PaymentMethodsController;
+use App\Http\Controllers\ServicesController;
 use App\Models\Inventory;
 use App\Models\Schedule;
 
@@ -149,6 +150,14 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/store', [ContactUsController::class, 'store']);
         Route::get('/edit/{id}', [ContactUsController::class, 'edit']);
         Route::get('/destroy/{id}', [ContactUsController::class, 'destroy']);
+    });
+
+    Route::prefix('services')->group(function() {
+        Route::get('/', [ServicesController::class, 'index']);
+        Route::get('/getrecords', [ServicesController::class, 'getrecords']);
+        Route::post('/store', [ServicesController::class, 'store']);
+        Route::get('/edit/{id}', [ServicesController::class, 'edit']);
+        Route::get('/destroy/{id}', [ServicesController::class, 'destroy']);
     });
     
 
